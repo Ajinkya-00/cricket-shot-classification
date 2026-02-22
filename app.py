@@ -66,7 +66,7 @@ CLASS_NAMES = {v: k for k, v in class_indices.items()}
 # ---------------- FILE UPLOAD ----------------
 uploaded_file = st.file_uploader(
     "📤 Upload Cricket Shot Image",
-    type=["jpg", "jpeg", "png"]
+    type=["jpg", "jpeg", "png", "webp"]
 )
 
 # ---------------- PREDICTION ----------------
@@ -76,8 +76,10 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
     st.image(image, caption="Uploaded Image", use_column_width=True)
 
-    # Preprocess Image
-    img = image.resize((224, 224))
+    # 🔥 Preprocess Image (AUTO INPUT SIZE)
+    input_shape = model.input_shape[1:3]  # e.g., (64, 64)
+    img = image.resize(input_shape)
+
     img_array = np.array(img) / 255.0
     img_array = np.expand_dims(img_array, axis=0)
 
@@ -93,7 +95,7 @@ if uploaded_file is not None:
     st.success(f"🎯 Predicted Shot: {predicted_class_name.upper()}")
     st.info(f"Confidence: {confidence:.2f}%")
 
-    # Probability Bar Chart
+    # Probability Chart
     st.subheader("Prediction Probability")
 
     prob_dict = {
@@ -105,6 +107,4 @@ if uploaded_file is not None:
 
 # ---------------- FOOTER ----------------
 st.markdown("---")
-
 st.markdown("Made with ❤️ using Streamlit & TensorFlow")
-
