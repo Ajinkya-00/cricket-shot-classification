@@ -57,7 +57,7 @@ def load_model():
 model = load_model()
 
 # ---------------- LOAD CLASS INDICES ----------------
-with open("class_indices.json", "r") as f:
+with open("class_names.json", "r") as f:
     class_indices = json.load(f)
 
 # Reverse mapping (index → class name)
@@ -107,3 +107,4 @@ if uploaded_file is not None:
 st.markdown("---")
 
 st.markdown("Made with ❤️ using Streamlit & TensorFlow")
+
