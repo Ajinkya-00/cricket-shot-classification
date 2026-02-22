@@ -51,7 +51,7 @@ st.write("")
 # ---------------- LOAD MODEL ----------------
 @st.cache_resource
 def load_model():
-    model = tf.keras.models.load_model("cricket_shot_model.h5")
+    model = tf.keras.models.load_model("model.h5")
     return model
 
 model = load_model()
@@ -105,4 +105,5 @@ if uploaded_file is not None:
 
 # ---------------- FOOTER ----------------
 st.markdown("---")
+
 st.markdown("Made with ❤️ using Streamlit & TensorFlow")
